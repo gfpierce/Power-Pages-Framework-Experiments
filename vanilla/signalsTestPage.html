@@ -1,0 +1,38 @@
+{% manifest %} { "type": "Functional", "displayName": "js-library-test",
+"description": "This component displays data in an individual accordion
+element", "tables": [""], "params": [ ] } {% endmanifest %}
+
+
+<script type="module" src="~/signalsTest.js"></script>
+<script type="module">
+  import { createSignal, effect } from "./signalsTest.js";
+
+  const [readCount, setCount] = createSignal(0);
+
+  document.getElementById('button-increment').addEventListener('click', () => {
+    setCount(readCount() + 1);
+  })
+
+  document.getElementById('button-decrement').addEventListener('click', () => {
+    setCount(readCount() - 1);
+  })
+
+  effect(function() {
+    document.getElementById("count-value").innerText = readCount();
+  });
+
+  effect(function() {
+    document.getElementById("doubled-value").innerText = readCount() * 2;
+  });
+
+  //effect(() => console.log(readCount()));
+</script>
+
+<button id="button-increment" type="button">
+  Increment
+</button>
+<button id="button-decrement" type="button">
+  Decrement
+</button>
+<p id="count-value"></p>
+<p id="doubled-value"></p>
