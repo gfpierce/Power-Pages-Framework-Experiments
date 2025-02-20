@@ -3,11 +3,15 @@
 [""], "params": [ { "id": "liquidVar", "displayName": "Liquid Variable",
 "description": "The liquid variable to display" } ] } {% endmanifest %}
 
+
 <style>
-  .pinkBG {
-    background-color: lightpink;
-  }
-</style>
+    .whiteBG {
+      background-color: white;
+    }
+    .greenBG {
+      background-color: aquamarine;
+    }
+  </style>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script type="module">
@@ -17,14 +21,29 @@
       const message = Vue.ref("Hello Vue!");
       function increment() {
         counter.count++;
-      };
+      }
       function decrement() {
         counter.count--;
-      };
+      }
+
+      const divStyle = Vue.ref("whiteBG");
+
+      function changeBGColor() {
+        console.log("changing");
+        if (document.getElementById("background").classList.contains("whiteBG")) {
+          divStyle.value = "greenBG";
+          console.log("green");
+        } else {
+          divStyle.value = "whiteBG";
+          console.log("white");
+        }
+      }
 
       return {
         increment,
         decrement,
+        changeBGColor,
+        divStyle,
         counter,
         message,
       };
@@ -35,10 +54,14 @@
   app.mount("#app");
 </script>
 
+
 <div id="app">
-  <h1>${message}</h1>
-  <button v-on:click="increment">Increment</button>
-  <button v-on:click="decrement">Decrement</button>
-  <p>Count: ${counter.count}</p>
-  <p>Doubled: ${counter.count * 2}</p>
+  <div v-bind:class="divStyle" id="background">
+    <h1>${message}</h1>
+    <button type="button" v-on:click="increment">Increment</button>
+    <button type="button" v-on:click="decrement">Decrement</button>
+    <p>Count: ${counter.count}</p>
+    <p>Doubled: ${counter.count * 2}</p>
+    <button type="button" v-on:click="changeBGColor">Change Background Color</button>
+  </div>
 </div>
