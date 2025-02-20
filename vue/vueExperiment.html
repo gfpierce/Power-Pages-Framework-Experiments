@@ -1,0 +1,44 @@
+{% manifest %} { "type": "Functional", "displayName": "vue-test", "description":
+"This component displays data in an individual accordion element", "tables":
+[""], "params": [ { "id": "liquidVar", "displayName": "Liquid Variable",
+"description": "The liquid variable to display" } ] } {% endmanifest %}
+
+<style>
+  .pinkBG {
+    background-color: lightpink;
+  }
+</style>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="module">
+  const app = Vue.createApp({
+    setup() {
+      const counter = Vue.reactive({ count: 0 });
+      const message = Vue.ref("Hello Vue!");
+      function increment() {
+        counter.count++;
+      };
+      function decrement() {
+        counter.count--;
+      };
+
+      return {
+        increment,
+        decrement,
+        counter,
+        message,
+      };
+    },
+    delimiters: ["${", "}"],
+  });
+
+  app.mount("#app");
+</script>
+
+<div id="app">
+  <h1>${message}</h1>
+  <button v-on:click="increment">Increment</button>
+  <button v-on:click="decrement">Decrement</button>
+  <p>Count: ${counter.count}</p>
+  <p>Doubled: ${counter.count * 2}</p>
+</div>
