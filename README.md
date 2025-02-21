@@ -9,7 +9,7 @@ What is supported by Microsoft is the [PCF framework](https://learn.microsoft.co
 [Alpine JS](https://alpinejs.dev/) is the best fit I've found for developing custom UI components on Power Pages. 
 
 ## Experiments
-For each different framework, I built a basic counter app, that includes buttons for incrementing and decrementing the counter. The app displays the current value of the counter, and the value of the counter doubled. I'm writing this out in the order I tried them. I was able to get all of these to work in Power Pages, but some of them required a lot of work to do so.
+For each different framework, I built a basic counter app, that includes buttons for incrementing and decrementing the counter. The app displays the current value of the counter, and the value of the counter doubled. I'm writing this out in the order I tried them. I was able to get all of these to work in Power Pages, but some of them required a lot of work to do so. What follows is the narrative of my progression through the frameworks.
 
 ### Solid
 [Solid](https://www.solidjs.com/)
