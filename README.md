@@ -29,14 +29,16 @@ The purpose of this experiment was to see how practical it would be to make a li
 
 This was a bad idea.
 
-It took a lot of configuration to get the library to talk to the Power Pages Web Template record. It did eventually work, but I can't recommend building your own framework for Power Pages. This led me to thinking, since Web Templates really only work for HTML, why not use a framework that integrates with HTML?
+It took a lot of configuration to get the library to talk to the Power Pages Web Template record. It did eventually work, but I can't recommend building your own framework for Power Pages. This led me to thinking, since Web Templates really only work with HTML, why not use a framework that integrates tightly with HTML?
 
 ### Vue
 [Vue](https://vuejs.org/)
 
 That question led me to Vue. Vue was also a bit of a headache to get working in Power Pages, but once I figured out the quirks, it worked fine. I can kind of recommend Vue for serious projects in Power Pages, but I would also recommend asking yourself if putting a large-scale Vue app inside a Power Pages site is really a good idea for your project.
 
-Vue also required a bit of configuration. Because the Power Pages Web Template setup recognizes Liquid tagging, that created an issue with using Vue. Both Vue and Liquid use double mustache brackets `{{ }}` for variable interpolation. This would confuse whatever compiles a Power Pages site and it wouldn't put anything in the spots where the variables should be. Vue does allow you to change the delimiters, which I did (`${}` worked just fine), but having to do that manually on every project would be a pain. I remembered that I had used Alpine to build my personal website, and that it works pretty seamlessly inside HTML. So I decided to give Alpine a try.
+Vue also required a bit of configuration. Because the Power Pages Web Template setup recognizes Liquid tagging, that created an issue with using Vue. Both Vue and Liquid use double mustache brackets `{{ }}` for variable interpolation. This would confuse whatever compiles a Power Pages site and it wouldn't put anything in the spots where the variables should be. Vue does allow you to change the delimiters, which I did (`${}` worked just fine), but having to do that manually on every project would be a pain. 
+
+After trying Vue, I remembered that I had used Alpine to build my personal website, and that it works pretty seamlessly inside HTML. So I decided to give Alpine a try.
 
 ### Alpine
 [Alpine](https://alpinejs.dev/)
