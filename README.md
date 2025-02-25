@@ -1,7 +1,7 @@
 # Power Pages Framework Experiments
 This repository contains a collection of experiments on JavaScript frameworks working in Microsoft Power Pages.
 
-## TL;DR, shut up Garrett
+## TL;DR
 As of this writing (2/21/2025), none of these options are officially supported by Microsoft.
 
 What is supported by Microsoft is the [PCF framework](https://learn.microsoft.com/en-us/power-apps/developer/component-framework/overview), which can tie directly into your Dataverse data.
