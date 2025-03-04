@@ -80,11 +80,14 @@ button {
       const player = Vue.ref(null);
       const undoStack = Vue.reactive([]);
 
-      let board = Vue.reactive([
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""],
-      ]);
+      let game = Vue.reactive({
+        board: 
+        [
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
+        ]
+      });
 
       const randomNumber = () => {
         const random = Math.round(Math.random());
@@ -94,7 +97,7 @@ button {
       const checkTie = () => {
         for (let i = 0; i < 3; i++) {
           for (let j = 0; j < 3; j++) {
-            if (!board[i][j]) {
+            if (!game.board[i][j]) {
               return false;
             }
           }
@@ -106,13 +109,13 @@ button {
         const a = currentPlayer.value;
 
         for (let i = 0; i < 3; i++) {
-          if (board[i].every((cell) => cell === a)) return true;
-          if (board.every((row) => row[i] === a)) return true;
+          if (game.board[i].every((cell) => cell === a)) return true;
+          if (game.board.every((row) => row[i] === a)) return true;
         }
 
-        if (board[0][0] === a && board[1][1] === a && board[2][2] === a)
+        if (game.board[0][0] === a && game.board[1][1] === a && game.board[2][2] === a)
           return true;
-        if (board[0][2] === a && board[1][1] === a && board[2][0] === a)
+        if (game.board[0][2] === a && game.board[1][1] === a && game.board[2][0] === a)
           return true;
 
         return false;
@@ -127,7 +130,7 @@ button {
         }
         const lastItem = undoStack.length - 1;
         const [row, col] = undoStack[lastItem];
-        board[row][col] = "";
+        game.board[row][col] = "";
         currentPlayer.value = currentPlayer.value === "X" ? "O" : "X";
         player.value = player.value === "Player2" ? "Player1" : "Player2";
         undoStack.splice(lastItem, 1);
@@ -138,9 +141,9 @@ button {
           return;
         }
 
-        if (!board[row][col] && !winner.value) {
+        if (!game.board[row][col] && !winner.value) {
           undoStack.push([row, col]);
-          board[row][col] = currentPlayer.value;
+          game.board[row][col] = currentPlayer.value;
           if (checkWin()) {
             winner.value = `${currentPlayer.value} by ${player.value}`;
           } else if (checkTie()) {
@@ -157,7 +160,7 @@ button {
         currentPlayer.value = "X";
         gameOver.value = false;
         player.value = null;
-        board = [
+        game.board = [
           ["", "", ""],
           ["", "", ""],
           ["", "", ""],
@@ -170,7 +173,7 @@ button {
         checkWin,
         checkTie,
         randomNumber,
-        board,
+        game,
         undoStack,
         player,
         currentPlayer,
@@ -194,7 +197,7 @@ button {
 
     <p class="label">Current Player: <span>${ player }</span> plays <span>${ currentPlayer }</span></p>
     <div class="board">
-        <div class="row" v-for="(row, rowIndex) of board" :key="rowIndex">
+        <div class="row" v-for="(row, rowIndex) of game.board" :key="rowIndex">
             <div class="cell" v-for="(cell, cellIndex) of row" :key="cellIndex" :class="{ 'cell-x': cell === 'X', 'cell-o': cell === 'O' }" :disabled="cell !== null" v-on:click="play(rowIndex, cellIndex)">
                 ${ cell }
             </div>
